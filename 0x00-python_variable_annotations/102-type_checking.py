@@ -4,16 +4,16 @@
 from typing import Tuple, List
 
 
-def zoom_array(lst: Tuple, factor: int = 2) -> List:
+def zoom_array(lst: Tuple[int], factor: int = 2) -> List[int]:
     """function definition"""
-    zoomed_in: Tuple = [
+    zoomed_in: Tuple[int] = [
         item for item in lst
         for i in range(int(factor))
     ]
     return zoomed_in
 
 
-array = [12, 72, 91]
+array: Tuple[int, int, int]  = [12, 72, 91]
 
 zoom_2x = zoom_array(array)
 
