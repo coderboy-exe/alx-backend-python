@@ -5,4 +5,5 @@ from typing import Tuple, Union
 
 
 def to_kv(k: str, v: Union[float, int]) -> Tuple[str, float]:
+    """function def"""
     return (k, (v**2))

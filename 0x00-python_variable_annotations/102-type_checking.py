@@ -1,10 +1,11 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 """ Returns elements of an array in a specific range """
 
 from typing import Tuple, List
 
 
 def zoom_array(lst: Tuple, factor: int = 2) -> List:
+    """function definition"""
     zoomed_in: Tuple = [
         item for item in lst
         for i in range(int(factor))
