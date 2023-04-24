@@ -58,18 +58,32 @@ class TestGithubOrgClient(unittest.TestCase):
     TEST_PAYLOAD,)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """ Test suite for GithubOrgClient class """
+    def get_side_effect(self):
+        """ side_effect getter function """
+        self.mock_method.return_value.json.side_effect = [
+            self.org_payload,
+            self.repos_payload,
+        ]
+
     @classmethod
     def setUpClass(cls):
         """ setup test suite """
         cls.get_patcher = patch("requests.get")
-        cls.mock_get = cls.get_patcher.start()
+        cls.mock_method = cls.get_patcher.start()
 
-        cls.mock_get.side_effect = [
-                cls.org_payload,
-                cls.repos_payload,
-            ]
+    def test_public_repos(self):
+        """ Test case for public_repos method """
+        self.get_side_effect()
+        test_client = Client("holberton")
+        repos = test_client.public_repos()
+        self.assertEqual(repos, self.expected_repos)
 
-
+    def test_public_repos_with_license(self):
+        """ Test case for public repos with a specific license """
+        self.get_side_effect()
+        test_client = Client("holberton")
+        repos = test_client.public_repos("apache-2.0")
+        self.assertEqual(repos, self.apache2_repos)
 
     @classmethod
     def tearDownClass(cls):
