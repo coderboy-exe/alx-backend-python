@@ -14,7 +14,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc"),
     ])
     @patch("client.get_json")
-    def test_org(self, org):
+    def test_org(self, org_name):
         """ test case for org """
         client = Client(org_name)
         self.assertEqual(client.org, {"payload": True})
