@@ -58,18 +58,19 @@ class TestGithubOrgClient(unittest.TestCase):
     TEST_PAYLOAD,)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """ Test suite for GithubOrgClient class """
-    def get_side_effect(self):
-        """ side_effect getter function """
-        self.mock_method.return_value.json.side_effect = [
-            self.org_payload,
-            self.repos_payload,
-        ]
 
     @classmethod
     def setUpClass(cls):
         """ setup test suite """
         cls.get_patcher = patch("requests.get")
         cls.mock_method = cls.get_patcher.start()
+
+    def get_side_effect(self):
+        """ side_effect getter function """
+        self.mock_method.return_value.json.side_effect = [
+            self.org_payload,
+            self.repos_payload,
+        ]
 
     def test_public_repos(self):
         """ Test case for public_repos method """
