@@ -37,7 +37,7 @@ class TestGithubOrgClient(unittest.TestCase):
         test = [{"name": "holberton"}]
         mock_json.return_value = test
         with patch("client.GithubOrgClient._public_repos_url",
-                    new_callable=PropertyMock) as mock_repos:
+                   new_callable=PropertyMock) as mock_repos:
             mock_repos.return_value = test
             mock_client = Client("holberton")
             self.assertEqual(mock_client.public_repos(), ["holberton"])
